@@ -8,9 +8,17 @@
     <body>
         <h1>Welcome {{name}}</h1>
         <p>Age {{age}}</p>
-        
-
 
         <p>This is a test page for the Django application.</p>
+
+
+        <h3>Books</h3>
+        <div>
+            <ul>
+                {% for book in books %}
+                    <li>{{ book.title }} by {{ book.author }} | Genre: {{book.genre}} Shelf location {{book.shelf_location}}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </body>
 </html>
