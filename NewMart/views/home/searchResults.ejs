@@ -1,0 +1,14 @@
+<% for (product of products) { %>
+    <div class="col-md-3">
+        <div class="card card-spacer">
+            <img class="card-img-top productImage" src="data:image/png;base64, <%- product.image %>" alt="Card image cap">
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><%-product.name %></h5>
+                <p class="card-text text-center"><%-product.description %></p>
+                <p class="card-title text-center text-muted">Rs <%-product.price %> </p>
+                <button class="btn btn-success myButton">Add to cart</button>
+                <!-- <p class="card-text"><%-product.category %></p> -->
+            </div>
+        </div>
+    </div>      
+<% } %>

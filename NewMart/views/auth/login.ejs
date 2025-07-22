@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+    <br>
+    <section>
+        <div class="container">
+            <h1 class="text-center niceColor">Welcome to NewMart</h1>
+            <p class="text-center">Your one-stop shop for all your needs</p>
+           
+        </div>  
+
+    </section>
+    <br><br>
+
+    <section>
+        <div class="container">
+            <% if (message) { %>
+                <div class="alert alert-primary" role="alert">
+                    <%-message %>
+                </div>
+                
+            <% } %>
+
+            <h3 class="text-center">Login</h3>
+
+            <form name="loginForm" id="loginForm" method="POST" action="/auth/login">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                
+                <a href="/auth/register" class="btn btn-primary">Register</a>
+                <button type="submit" class="btn btn-danger">Login</button>
+            </form> 
+        </div>
+        
+              
+    </section>
+
+
+<%- include('../partials/footer.ejs') %>

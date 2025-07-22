@@ -1,0 +1,113 @@
+<%- include('../partials/header.ejs') %>
+
+<section>
+    <div class="container">
+        <br>
+
+         <div class="alert alert-primary text-center" role="alert">
+            Edit Product
+        </div>
+
+        <br>    
+        <div class="text-center">
+            <img class="card-img-top productEditImage text-center" src="data:image/png;base64, <%- product.image %>" alt="Card image" >
+        </div>
+
+        <form name="createProductForm" id="createProductForm" method="POST" action="/admin/edit-product/<%-product._id %>">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" value="<%-product.name %>" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Desciption</label>
+                <input type="text" class="form-control" id="description" name="description" value="<%-product.description %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" value="<%-product.price %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select id="category" name='category' class="form-select">
+                    <option <% if (product.category=="Food") { %>selected  <% } %>>Food</option>
+                    <option <% if (product.category=="Beverages") { %>selected  <% } %>>Beverages</option>
+                    <option <% if (product.category=="Electronics") { %>selected  <% } %>>Electronics</option>
+                    <option <% if (product.category=="Clothing") { %>selected  <% } %>>Clothing</option>
+                    <option <% if (product.category=="Furniture") { %>selected  <% } %>>Furniture</option>
+                </select>
+
+            </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" name="stock" value="<%-product.stock %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" onchange="imageUploaded()">
+                <input type="hidden" name="image" value="<%- product.image %>" id="convertedImage">
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="sale" name="sale" <% if (product.sale) { %> checked  <% } %> >
+                <label class="form-check-label" for="sale">On Sale</label>
+            </div>
+
+
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="submit-button">Save changes</button>
+            </div>
+
+
+            <br><br><br><br>
+        </form>            
+
+    </div>
+
+
+</section>
+
+
+<script>
+    // submitButton = document.querySelector('#submit-button');
+    // submitButton.addEventListener('click', function(event) {
+    //     event.preventDefault();
+
+    //     console.log('function called');
+       
+    //     form=document.getElementById('createProductForm');
+    //     //submit the form
+    //     form.submit();
+    // }); 
+    
+
+        function imageUploaded() {
+            let base64String = "";
+            
+            let file = document.querySelector(
+                'input[type=file]')['files'][0];
+
+            let reader = new FileReader();
+            // console.log("next");
+
+            reader.onload = function () {
+                base64String = reader.result.replace("data:", "")
+                    .replace(/^.+,/, "");
+
+                imageBase64Stringsep = base64String;
+
+                // alert(imageBase64Stringsep);
+                console.log(base64String);
+
+                //set the value of the hidden input field to the base64 string
+                document.querySelector('#convertedImage').value = base64String;
+            }
+            reader.readAsDataURL(file);
+        }
+
+</script>
+
+
+
+<%- include('../partials/footer.ejs') %>

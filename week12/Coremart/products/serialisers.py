@@ -7,4 +7,3 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'  # Serialize all fields of the Product model
 
-    

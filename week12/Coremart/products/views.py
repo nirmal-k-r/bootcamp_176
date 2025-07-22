@@ -28,8 +28,9 @@ def create_product(request):
 def get_product_by_id(request,product_id):
     try:
         product = Product.objects.get(id=product_id)  # Fetch the product by ID
-        serialised= ProductSerializer(product)  # Serialize the product
-        return JsonResponse(serialised.data)  # Return the serialized product data as JSON
+        # serialised= ProductSerializer(product)  # Serialize the product
+        return JsonResponse(serialised.data)  # Return the serialized prod
+       
     except Product.DoesNotExist:
         return HttpResponse(status=404)
     

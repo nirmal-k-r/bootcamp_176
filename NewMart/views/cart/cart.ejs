@@ -1,0 +1,68 @@
+<%- include('../partials/header.ejs') %>
+    <br>
+    <section>
+        <div class="container">
+            <h1 class="text-center niceColor">My cart</h1>
+            <p class="text-center">Thanks for shopping with us!</p>
+        </div>  
+
+    </section>
+    <br><br>
+    <section>
+        <div class="container">
+            <h2 class="text-center">Your Cart Items</h2>
+            <% if (cart && Object.keys(cart).length > 0) { %>
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let id=0;
+                            for (item in cart) { %>
+                            <tr>
+                                <td><%= ++id %></td>
+                                <td><%- cart[item].name %></td>
+                                <td>Rs <%- cart[item].price %></td>
+                                <!-- <td><%- cart[item].qty %></td> -->
+                                <td>
+                                    <form action="/cart/update" method="POST">
+                                        <input type="hidden" name="id" value="<%- item %>">
+                                        <input type="number" name="qty" value="<%- cart[item].qty %>" min="1" class="form-control form-control-sm d-inline-block w-50">
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                    </form>
+                                </td>
+                                <td>Rs <%- cart[item].price * cart[item].qty %></td>
+                                <td><a href="/cart/remove/<%- item %>" class="btn btn-danger btn-sm">Remove</a></td>
+                            </tr>
+
+                        <% }%>
+                        <tr>
+                            <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                            <td>Rs <%-total%></td>
+                            <td><a href="/cart/payment" class="btn btn-success btn-sm">Checkout</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                </ul>
+            <% } else { %>
+                <p class="text-center">Your cart is empty.</p>
+            <% } %>
+        </div>
+       
+    </section>
+    <br><br> <br>
+
+
+
+
+<%- include('../partials/footer.ejs') %>
