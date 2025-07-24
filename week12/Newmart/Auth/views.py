@@ -60,7 +60,14 @@ class AuthView(APIView):
         else:
             user = User.objects.filter(username=username).first()
             if user and user.check_password(password):
+                
+                #delete token if it exists
                 token, created = Token.objects.get_or_create(user=user)
+                token.delete()  # Delete the existing token if it exists
+                
+                #create a new token for the user
+                token,created = Token.objects.get_or_create(user=user)
+
                 user_data = {
                     "id": user.id,
                     "username": user.username,
@@ -69,6 +76,7 @@ class AuthView(APIView):
                     "last_name": user.last_name,
                     "token": token.key
                 }
+            
                 return JsonResponse({"user": user_data}, status=201)
             else:
                 return JsonResponse({"error": "Invalid credentials"}, status=401)

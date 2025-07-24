@@ -4,10 +4,11 @@ from .models import Product
 from rest_framework.response import Response
 from .serialisers import ProductSerializer
 from rest_framework.permissions import AllowAny
+from .permissions import isAuthenticatedAndPostRequiresStaff  # Custom permission class for authentication
 
 # Create your views here.
 class ProductView(APIView):
-    permission_classes = (AllowAny,)  # No authentication required for this view
+    permission_classes = (isAuthenticatedAndPostRequiresStaff,)  # No authentication required for this view
     def get(self, request):
         # Logic to retrieve products from the database
         #get params
